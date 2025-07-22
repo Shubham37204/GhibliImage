@@ -1,4 +1,4 @@
-# GhibliImage
+#GhibliImage
 
 🎨 A visually rich and interactive web app inspired by the magical worlds of Studio Ghibli.
 
