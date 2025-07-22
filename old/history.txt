@@ -1,0 +1,30 @@
+// 'use client'
+// import React, { useEffect, useState } from 'react'
+
+// const History = () => {
+//   const [prompts, setPrompts] = useState([]);
+
+//   useEffect(() => {
+//     const stored = JSON.parse(localStorage.getItem("textPromptHistory") || "[]");
+//     setPrompts(stored);
+//   }, []);
+
+//   return (
+//     <div className="max-w-3xl mx-auto px-4 py-8">
+//       <h1 className="text-2xl font-bold mb-6">🕒 Prompt History</h1>
+//       {prompts.length === 0 ? (
+//         <p className="text-gray-500">No prompt history found.</p>
+//       ) : (
+//         <ul className="space-y-4">
+//           {prompts.map((prompt, idx) => (
+//             <li key={idx} className="p-4 bg-white shadow-sm rounded-lg border border-gray-200">
+//               {prompt}
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default History;

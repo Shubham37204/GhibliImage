@@ -1,0 +1,123 @@
+// "use client";
+// import { Button } from "@/components/ui/button";
+// import { ArrowRight } from "lucide-react";
+// import Link from "next/link";
+// import Image from "next/image";
+// import NavBar from "@/components/NavBar";
+// import Footer from "@/components/Footer";
+
+// const Landingpage = () => {
+//     return (
+//         <div className="w-full">
+//             {/* Navbar */}
+//             <NavBar />
+
+//             {/* Hero Section */}
+//             <section className="text-center py-24 px-4 bg-[#f5f3ef]">
+//                 <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
+//                     Transform Your Photos into <br />
+//                     Ghibli Art with Ghibli AI
+//                 </h1>
+//                 <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-6">
+//                     Experience the magic of Studio Ghibli’s artistic style with our AI-powered Ghibli image generator tool.
+//                 </p>
+//                 <Button className="bg-[#7e3e2d] hover:bg-[#5c2e22] text-white">
+//                     <Link href="/create">
+//                         Try Ghibli AI
+//                     </Link>
+//                     <ArrowRight className="ml-2 h-4 w-4" />
+//                 </Button>
+//             </section>
+
+//             {/* Features */}
+//             <section className="flex flex-col md:flex-row px-8 py-16 gap-12 bg-white">
+//                 <div className="flex-1 space-y-6">
+//                     <h2 className="text-2xl font-bold">Photo to Ghibli Art</h2>
+//                     <p>
+//                         Transform any photo into beautiful Studio Ghibli-style artwork with our Ghibli AI.
+//                         Simply upload your image and describe elements you want to enhance – mood, scene setting,
+//                         character details – and our generator will craft a complete transformation.
+//                     </p>
+
+//                     <ul className="space-y-4">
+//                         <li>
+//                             <strong>🎨 Simple Ghibli AI Prompting:</strong> Use everyday language to guide the transformation. No artistic background needed.
+//                         </li>
+//                         <li>
+//                             <strong>🖌️ Ghibli Art Style Control:</strong> Select specific Studio Ghibli influences like Spirited Away or My Neighbor Totoro.
+//                         </li>
+//                         <li>
+//                             <strong>🐾 Ghibli Character Integration:</strong> Add pets or family into your Ghibli scenes with stylized charm.
+//                         </li>
+//                     </ul>
+//                 </div>
+
+//                 <div className="flex-1 flex justify-center">
+//                     <Image
+//                         src="/assets/shubham.png"
+//                         alt="Ghibli style sample"
+//                         className="rounded-xl shadow-xl"
+//                         width={300}
+//                         height={400}
+//                     />
+//                 </div>
+
+//             </section>
+//             <section className="py-16 px-4 bg-[#f5f3ef]">
+//                 <h2 className="text-3xl font-bold text-center mb-12">Ghibli AI Features</h2>
+
+//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+//                     {/* Card 1 */}
+//                     <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+//                         <div className="text-3xl mb-4">🎯</div>
+//                         <h3 className="font-semibold text-lg mb-2">High Accuracy Ghibli Art Generation</h3>
+//                         <p className="text-muted-foreground text-sm">
+//                             Our advanced Ghibli AI algorithms ensure your photos maintain their essence while transforming into
+//                             authentic Studio Ghibli art style. Every Ghibli image preserves the original character while adopting the
+//                             distinctive Ghibli aesthetic.
+//                         </p>
+//                     </div>
+
+//                     {/* Card 2 */}
+//                     <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+//                         <div className="text-3xl mb-4">⚡</div>
+//                         <h3 className="font-semibold text-lg mb-2">Fast Image Processing</h3>
+//                         <p className="text-muted-foreground text-sm">
+//                             Get your transformed Ghibli art images in seconds with our optimized Ghibli AI generator technology.
+//                             Our efficient processing ensures quick delivery of high-quality Studio Ghibli style artwork.
+//                         </p>
+//                     </div>
+
+//                     {/* Card 3 */}
+//                     <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+//                         <div className="text-3xl mb-4">🌟</div>
+//                         <h3 className="font-semibold text-lg mb-2">Stunning Studio Ghibli Quality</h3>
+//                         <p className="text-muted-foreground text-sm">
+//                             Our Ghibli AI creates beautiful high-resolution Ghibli art that perfectly captures the magical Studio Ghibli aesthetic.
+//                             Every detail in your generated Ghibli image reflects the authentic charm of Studio Ghibli’s world.
+//                         </p>
+//                     </div>
+//                 </div>
+//             </section>
+
+//             {/* Call to Action */}
+//             <section className="text-center bg-[#e6d3c8] py-16 px-4">
+//                 <h2 className="text-2xl md:text-3xl font-bold mb-4">Create Your Magical Ghibli Artwork Today</h2>
+//                 <p className="max-w-xl mx-auto text-muted-foreground mb-6">
+//                     Join thousands of artists and Studio Ghibli fans creating Miyazaki-inspired images.
+//                 </p>
+//                 <Button className="bg-[#7e3e2d] hover:bg-[#5c2e22] text-white">
+//                     <Link href="/create">
+//                         Try Ghibli AI For Free
+//                     </Link>
+//                 </Button>
+//             </section>
+
+//             {/* Footer */}
+//             <Footer />
+
+//         </div>
+//     );
+// };
+
+// export default Landingpage;

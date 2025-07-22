@@ -1,0 +1,9 @@
+// @ts-nocheck - This is a JavaScript project, not TypeScript
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}

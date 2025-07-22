@@ -1,0 +1,207 @@
+// import { NextResponse } from "next/server";
+// import { Client } from "@gradio/client";
+
+// function createBlankImage(width = 256, height = 256) {
+//     const canvas = new OffscreenCanvas(width, height);
+//     const ctx = canvas.getContext("2d");
+//     ctx.fillStyle = "#ccc"; // light gray
+//     ctx.fillRect(0, 0, width, height);
+//     return canvas.convertToBlob({ type: "image/png" });
+// }
+
+// export async function POST(req) {
+//     try {
+//         const { prompt, image } = await req.json();
+
+//         const client = await Client.connect("jamesliu1217/EasyControl_Ghibli");
+
+//         // Convert base64 image if provided
+//         let blob;
+//         if (image) {
+//             const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
+//             const buffer = Buffer.from(base64Data, "base64");
+//             blob = new Blob([buffer], { type: "image/png" });
+//         } else {
+//             blob = await createBlankImage(); // use gray canvas for text-only
+//         }
+
+//         const result = await client.predict("/single_condition_generate_image", {
+//             prompt: prompt || "Studio Ghibli magical scene, dreamy style",
+//             spatial_img: blob,
+//             height: 512,
+//             width: 512,
+//             seed: 42,
+//             control_type: "Ghibli",
+//             use_zero_init: true,
+//             zero_steps: 3,
+//         });
+
+//         if (!result || !result.data || !result.data[0]) {
+//             throw new Error("No image returned from model.");
+//         }
+
+//         //return NextResponse.json({ image: result.data[0] });
+//         return NextResponse.json({ image: result.data[0].url }); // Extract actual URL
+
+//     } catch (err) {
+//         console.error("API Error:", err.message);
+//         return NextResponse.json({ error: err.message }, { status: 500 });
+//     }
+// }
+
+
+
+
+
+
+//for old code go to old/route.txt
+import { NextResponse } from "next/server";
+import { Client } from "@gradio/client";
+// ERROR: Missing dependency - 'canvas' package is not installed
+// SOLUTION: Install the canvas package using: npm install canvas
+import { createCanvas } from "canvas";
+
+//use of createblankimage and blob
+// This part converts a base64-encoded image (coming from the frontend)
+//  into a binary Blob, which is required by the Gradio/Hugging Face client.predict() API.
+// ERROR: Missing error handling for canvas creation
+// SOLUTION: Add try-catch block around canvas operations to handle potential errors
+async function createBlankImage(width = 256, height = 256) {
+    try {
+        const canvas = createCanvas(width, height);
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#ccc"; // light gray
+        ctx.fillRect(0, 0, width, height);
+
+        const buffer = canvas.toBuffer("image/png");
+        return new Blob([buffer], { type: "image/png" });
+    } catch (error) {
+        console.error("Error creating blank image:", error);
+        throw new Error("Failed to create blank image");
+    }
+}
+
+// ERROR: Missing validation for required parameters
+// SOLUTION: Add validation to check if prompt is provided and handle missing parameters gracefully
+export async function POST(req) {
+    try {
+        const { prompt, image } = await req.json();
+
+        // Validate required parameters
+        if (!prompt) {
+            return NextResponse.json({ error: "Prompt is required" }, { status: 400 });
+        }
+
+        const client = await Client.connect("jamesliu1217/EasyControl_Ghibli");
+        let blob;
+        if (image) {
+            // Convert base64 image to Blob
+            const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
+            const buffer = Buffer.from(base64Data, "base64");
+            blob = new Blob([buffer], { type: "image/png" });
+        } else {
+            // Generate a blank placeholder image
+            blob = await createBlankImage();
+        }
+
+        const result = await client.predict("/single_condition_generate_image", {
+            prompt: prompt || "Studio Ghibli magical scene, dreamy style",
+            spatial_img: blob,
+            height: 512,
+            width: 512,
+            seed: 42,
+            control_type: "Ghibli",
+            use_zero_init: true,
+            zero_steps: 3,
+        });
+
+        if (!result || !result.data || !result.data[0]) {
+            throw new Error("No image returned from model.");
+        }
+
+        // ✅ Safely return the image URL
+        return NextResponse.json({ image: result.data[0].url });
+
+    } catch (err) {
+        console.error("API Error:", err.message);
+        return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+}
+
+
+
+import { NextResponse } from "next/server";
+import { Client } from "@gradio/client";
+import { createCanvas } from "canvas";
+
+async function createBlankImage(width = 256, height = 256) {
+    try {
+        const canvas = createCanvas(width, height);
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#ccc"; // light gray
+        ctx.fillRect(0, 0, width, height);
+
+        const buffer = canvas.toBuffer("image/png");
+        return new Blob([buffer], { type: "image/png" });
+    } catch (error) {
+        console.error("Error creating blank image:", error);
+        throw new Error("Failed to create blank image");
+    }
+}
+
+export async function POST(req) {
+    try {
+        const { prompt, image } = await req.json();
+
+        // Validate required parameters
+        if (!prompt) {
+            return NextResponse.json({ error: "Prompt is required" }, { status: 400 });
+        }
+
+        // const client = await Client.connect("jamesliu1217/EasyControl_Ghibli", {
+        //     token: process.env.HUGGINGFACE_API_TOKEN
+        // });
+
+        const client = await Client.connect("abidlabs/EasyGhibli", {
+            token: process.env.HUGGINGFACE_API_TOKEN,
+        });
+
+        let blob;
+        if (image) {
+            // Convert base64 image to Blob
+            const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
+            const buffer = Buffer.from(base64Data, "base64");
+            blob = new Blob([buffer], { type: "image/png" });
+        } else {
+            // Generate a blank placeholder image
+            blob = await createBlankImage();
+        }
+
+        const result = await client.predict("/single_condition_generate_image", {
+            spatial_img: blob,
+            prompt,
+        });
+
+        // const result = await client.predict("/single_condition_generate_image", {
+        //     prompt: prompt || "Studio Ghibli magical scene, dreamy style",
+        //     spatial_img: blob,
+        //     height: 512,
+        //     width: 512,
+        //     seed: 42,
+        //     control_type: "Ghibli",
+        //     use_zero_init: true,
+        //     zero_steps: 3,
+        // });
+
+        if (!result || !result.data || !result.data[0]) {
+            throw new Error("No image returned from model.");
+        }
+
+        // ✅ Safely return the image URL
+        return NextResponse.json({ image: result.data[0].url });
+
+    } catch (err) {
+        console.error("API Error:", err.message);
+        return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+}

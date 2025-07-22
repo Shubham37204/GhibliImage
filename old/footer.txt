@@ -1,0 +1,16 @@
+// import React from 'react'
+
+// const Footer = () => {
+//     return (
+//          <footer className="bg-white border-t py-10 px-4 text-center text-sm text-muted-foreground">
+//             <div>
+//                 <strong className="block text-lg font-semibold mb-1">Ghibli AI</strong>
+//                 <p className="max-w-xl mx-auto">
+//                     Inspired by the magical worlds of Studio Ghibli. This is a fan project and is not affiliated with Studio Ghibli Inc.
+//                 </p>
+//             </div>
+//         </footer>
+//     )
+// }
+
+// export default Footer
